@@ -7,13 +7,31 @@ class SearchBar extends React.Component {
     this.state = {
       searchVal: '',
     };
+
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onSearchClick = this.onSearchClick.bind(this);
   }
 
+  onInputChange(e) {
+    let val = e.target.value;
 
+    this.setState({
+      searchVal: val,
+    });
+  }
+
+  onSearchClick() {
+    if (this.state.searchVal !== '') {
+      this.props.onSearchHandler(this.state.searchVal);
+    }
+  }
 
   render() {
     return (
-      <div>SearchBar</div>
+      <div>
+        <input onChange={ this.onInputChange }></input>
+        <button onClick={ this.onSearchClick }>Search</button>
+      </div>
     );
   }
 }
