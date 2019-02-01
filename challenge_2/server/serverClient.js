@@ -10,9 +10,8 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-app.get('/api/currency', (req, res, next) => {
-  const currency = 'bpi';
-  console.log(`https://api.coindesk.com/v1/${ currency }/historical/close.json`);
+app.get('/currency/:name', (req, res, next) => {
+  const currency = req.params.name;
 
   axios.get(`https://api.coindesk.com/v1/${ currency }/historical/close.json`)
   .then(({ data }) => {
